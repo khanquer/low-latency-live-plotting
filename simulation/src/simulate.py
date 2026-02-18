@@ -26,22 +26,25 @@ class SimulationManager:
         print("successfully initialized model")
 
 
-        history = []
+        # history = []
         batch_size = 50
         num_rows = 0
+        batch = []
         while current_time <= final_time:
             try:
                 things = model.get(execution.variables)
                 # Flatten the results: [time, var1, var2...]
                 current_row = [current_time] + [float(t[0]) for t in things]
+                batch.append(current_row)
                 
-                # Emit to UI
-                self.socketio.emit('trajectory', current_row)
-                
-                if num_rows % batch_size == 0:
+                if len(batch) > batch_size:
+                    # Emit to UI
+                    self.socketio.emit('trajectory', batch)
                     print(f"Sent {num_rows} rows to client")
+                    batch = []
+
                 # Store for saving later
-                history.append(current_row)
+                # history.append(current_row)
 
                 num_rows += 1
                 
@@ -51,17 +54,20 @@ class SimulationManager:
 
             model.do_step(current_time, step_size, True)
             current_time += step_size
+        if batch:
+            self.socketio.emit('trajectory', batch)
+
         self.socketio.emit('simulation_finished', "Simulation Complete")
         print(f"Simulation complete: Sent {num_rows} rows to client")
         
         # 2. Save to file after the loop finishes
-        output_filename = os.path.join("src", "resources", "results", f"{execution.fmu_id}_result_{execution.result_id}.csv")
-        with open(output_filename, mode='w', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow(['time'] + execution.variables)
-            writer.writerows(history)
+        # output_filename = os.path.join("src", "resources", "results", f"{execution.fmu_id}_result_{execution.result_id}.csv")
+        # with open(output_filename, mode='w', newline='') as f:
+        #     writer = csv.writer(f)
+        #     writer.writerow(['time'] + execution.variables)
+        #     writer.writerows(history)
         
-        print(f"Simulation saved to {output_filename}")
+        # print(f"Simulation saved to {output_filename}")
 
 class ResultHandler:
     def fetch_result():
