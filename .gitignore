@@ -2,3 +2,4 @@ simulation/src/resources/results
 ui/node_modules
 *.pyc
 __pycache__/
+*.txt
