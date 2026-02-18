@@ -19,7 +19,6 @@ class Trajectory(BaseModel):
     @field_validator('fmu_id')
     @classmethod
     def strip_fmu_extension(cls, v: str) -> str:
-        # If the string ends with .fmu (case insensitive), remove it
         if v.lower().endswith('.fmu'):
             return v[:-4]
         return v

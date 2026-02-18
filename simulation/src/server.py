@@ -17,7 +17,6 @@ traj_fetcher = TrajectoryHandler(simulation_manager=sim_manager)
 @socketio.on('connect')
 def handle_connect():
     print('Client connected to the WebSocket!')
-    emit('server_message', {'data': 'Hello from Flask!'})
 
 # 3. Define the "Disconnect" Event
 @socketio.on('disconnect')

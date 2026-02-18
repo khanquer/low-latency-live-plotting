@@ -11,7 +11,12 @@ const Sidebar = ({ onFMUSelect, onConfigChange, onStart, selectedVars, setVariab
     { 
       id: 'Modelica_Fluid_Examples_AST_BatchPlant_BatchPlant_StandardWater.fmu', 
       name: 'Batch Plant Standard Water',
-      vars: ['T_tank', 'level', 'p_pump', 'valve_pos', 'flow_rate'] 
+      vars: ['B1.level', 'B2.level', 'B3.ports[2].m_flow'] 
+    },
+    { 
+      id: 'Modelica_Mechanics_Translational_Examples_Oscillator.fmu', 
+      name: 'Translational Oscillator',
+      vars: ['mass1.s', 'mass2.s', 'mass1.v', 'mass2.v'] 
     }
   ];
 

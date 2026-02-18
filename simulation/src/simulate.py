@@ -27,7 +27,8 @@ class SimulationManager:
 
 
         history = []
-            
+        batch_size = 50
+        num_rows = 0
         while current_time <= final_time:
             try:
                 things = model.get(execution.variables)
@@ -37,8 +38,12 @@ class SimulationManager:
                 # Emit to UI
                 self.socketio.emit('trajectory', current_row)
                 
+                if num_rows % batch_size == 0:
+                    print(f"Sent {num_rows} rows to client")
                 # Store for saving later
                 history.append(current_row)
+
+                num_rows += 1
                 
             except Exception as e:
                 print(f"Error at {current_time}: {e}")
@@ -47,6 +52,7 @@ class SimulationManager:
             model.do_step(current_time, step_size, True)
             current_time += step_size
         self.socketio.emit('simulation_finished', "Simulation Complete")
+        print(f"Simulation complete: Sent {num_rows} rows to client")
         
         # 2. Save to file after the loop finishes
         output_filename = os.path.join("src", "resources", "results", f"{execution.fmu_id}_result_{execution.result_id}.csv")
