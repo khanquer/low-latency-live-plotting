@@ -35,7 +35,7 @@ function App() {
     const payload = {
       "fmu_id": selectedFMU,
       "config": {
-          "start_time": parseFloat(0.0),
+          "start_time": parseFloat(config.start),
           "final_time": parseFloat(config.stop),
           "step_size": parseFloat(config.step)
       },

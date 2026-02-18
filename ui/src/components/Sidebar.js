@@ -23,7 +23,7 @@ const Sidebar = ({ onFMUSelect, onConfigChange, onStart, selectedVars, setVariab
   const [localFMU, setLocalFMU] = useState(null);
 
   return (
-    <div style={{ padding: '25px', display: 'flex', flexDirection: 'column', height: '100%', background: '#ff6600', color: 'white' }}>
+    <div style={{ padding: '25px', display: 'flex', flexDirection: 'column', height: '100%', background: '#f1c470', color: 'white' }}>
       <h2 style={{ borderBottom: '2px solid white', paddingBottom: '10px' }}>Simulation Setup</h2>
       
       <div style={{ marginBottom: '20px' }}>
