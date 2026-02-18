@@ -28,7 +28,7 @@ class SimulationManager:
 
         # history = []
         batch_size = 50
-        num_rows = 0
+        num_rows = 1
         batch = []
         while current_time <= final_time:
             try:
@@ -37,9 +37,10 @@ class SimulationManager:
                 current_row = [current_time] + [float(t[0]) for t in things]
                 batch.append(current_row)
                 
-                if len(batch) > batch_size:
+                if len(batch) >= batch_size:
                     # Emit to UI
                     self.socketio.emit('trajectory', batch)
+                    self.socketio.sleep(0.01)
                     print(f"Sent {num_rows} rows to client")
                     batch = []
 
