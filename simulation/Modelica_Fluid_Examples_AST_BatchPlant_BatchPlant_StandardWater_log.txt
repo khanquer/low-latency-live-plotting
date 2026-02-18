@@ -1,0 +1,22 @@
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error] <NonlinearBlockConvergenceError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   Failed to find a solution for nonlinear <value name="block">"(init)3"</value> at <value name="time">        0.0000000000000000E+00</value>.
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   Could not compute next set of values for the iteration variables that would get us closer to a solution.
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   The <value name="function">KINSol</value> outputs:
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <value name="functionL2Norm">        9.7970563296740187E-01</value>, <value name="scaledStepLength">        4.9993883429999997E+00</value>, <value name="tolerance">        1.0000000000000000E-08</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <value name="conditionNumber">       1.0000000000000000E+100</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <ZeroColumnJacobian><value name="column">1</value> is zero, meaning the partial derivative of all residuals is zero with respect to
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <vector name="iv:">"B5.InnerTankTop[1].port.p"</vector>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </ZeroColumnJacobian>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <ZeroRowJacobian><value name="row">2</value> is zero, meaning the partial derivative of <value name="residual">1</value> with respect to all iteration variables is zero
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </ZeroRowJacobian>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   Residuals:
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   0: 9.797056e-01
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   1: 0.000000e+00
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   Iteration variables:
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   0: value=5.000000e+06
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <vector name="name">"B5.InnerTankTop[1].port.p"</vector>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   1: value=5.000000e+06
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <vector name="name">"B4.ports[1].p"</vector>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   Number of iterations in nonlinear <value name="solver">1</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error] </NonlinearBlockConvergenceError>
