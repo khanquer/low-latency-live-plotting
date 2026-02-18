@@ -24,13 +24,14 @@ function App() {
 
   const startSimulation = () => {
     if (!selectedFMU || variables.length === 0) {
-      alert("Please select an FMU and variables.");
+      alert("Please select an FMU and at least one variable.");
       return;
     }
+
     setIsSimulating(true);
     setFinalResults(null);
 
-    // Exact JSON for backend processing
+    // Payload formatted for the ExecutionConfig and Trajectory Pydantic models
     const payload = {
       "fmu_id": selectedFMU,
       "config": {
@@ -47,19 +48,32 @@ function App() {
 
   return (
     <div style={{ display: 'flex', height: '100vh', background: '#ffffff', color: '#333' }}>
-      <div style={{ background: '#ff6600', color: 'white', minWidth: '320px' }}>
-        <Sidebar onFMUSelect={setSelectedFMU} onConfigChange={setConfig} onStart={startSimulation} selectedVars={variables} setVariables={setVariables} isSimulating={isSimulating} />
+      <div style={{ minWidth: '320px' }}>
+        <Sidebar 
+          onFMUSelect={setSelectedFMU} 
+          onConfigChange={setConfig}
+          onStart={startSimulation}
+          selectedVars={variables}
+          setVariables={setVariables}
+          isSimulating={isSimulating}
+        />
       </div>
-      <main style={{ flex: 1, padding: '30px', overflowY: 'auto', display: 'flex', gap: '20px' }}>
+      
+      <main style={{ flex: 1, padding: '30px', overflowY: 'auto', display: 'flex', gap: '30px' }}>
         <div style={{ flex: 2 }}>
           <h2 style={{ color: '#ff6600', borderBottom: '2px solid #ff6600' }}>Live Simulation Feed</h2>
           {variables.map((v, index) => (
             <FlowChart key={v} varName={v} varIndex={index + 1} socket={socket} />
           ))}
         </div>
-        <div style={{ flex: 1, borderLeft: '1px solid #ddd', paddingLeft: '20px' }}>
+
+        <div style={{ flex: 1, borderLeft: '1px solid #eee', paddingLeft: '30px' }}>
           <h3 style={{ color: '#ff6600' }}>Result Viewer</h3>
-          {finalResults && <pre style={{ fontSize: '11px' }}>{JSON.stringify(finalResults, null, 2)}</pre>}
+          {finalResults && (
+            <pre style={{ background: '#f9f9f9', padding: '15px', borderRadius: '8px', fontSize: '12px' }}>
+              {JSON.stringify(finalResults, null, 2)}
+            </pre>
+          )}
         </div>
       </main>
     </div>
