@@ -28,7 +28,7 @@ def handle_disconnect():
 @socketio.on('trajectory')
 def handle_ping(data):
     print(f"Received ping: {data}")
-    traj_info = Trajectory.model_validate_json(data)
+    traj_info = Trajectory.model_validate(data)
     socketio.start_background_task(traj_fetcher.fetch_trajectory, traj_info)
     emit('pong', {'status': 'received'})
 

@@ -2,7 +2,7 @@ import { io } from 'socket.io-client';
 
 // In a Docker Compose setup, 'localhost:5000' works because the 
 // browser (on your host machine) maps to the container's exposed port.
-const URL = "http://localhost:5000";
+const URL = "http://localhost:8000";
 
 export const socket = io(URL, {
     autoConnect: false, // We manually connect when the app loads

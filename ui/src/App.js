@@ -34,14 +34,15 @@ function App() {
     const payload = {
       "fmu_id": selectedFMU,
       "config": {
-          "start": parseFloat(config.start),
-          "stop": parseFloat(config.stop),
-          "step": parseFloat(config.step)
+          "start_time": parseFloat(0.0),
+          "final_time": parseFloat(config.stop),
+          "step_size": parseFloat(config.step)
       },
       "variables": variables 
     };
+    console.log(payload)
 
-    socket.emit('start_simulation', payload);
+    socket.emit('trajectory', payload);
   };
 
   return (

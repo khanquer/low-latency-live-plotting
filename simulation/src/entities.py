@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 import enum
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from typing import Optional
 
 
@@ -16,6 +16,13 @@ class Trajectory(BaseModel):
     config: ExecutionConfig
     variables: list[str]
 
+    @field_validator('fmu_id')
+    @classmethod
+    def strip_fmu_extension(cls, v: str) -> str:
+        # If the string ends with .fmu (case insensitive), remove it
+        if v.lower().endswith('.fmu'):
+            return v[:-4]
+        return v
 
 x = {
     "fmu_id": "id",

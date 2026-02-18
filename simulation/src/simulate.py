@@ -46,6 +46,7 @@ class SimulationManager:
 
             model.do_step(current_time, step_size, True)
             current_time += step_size
+        self.socketio.emit('trajectory', "Simulation Complete")
         
         # 2. Save to file after the loop finishes
         output_filename = os.path.join("src", "resources", "results", f"{execution.fmu_id}_result_{execution.result_id}.csv")
@@ -55,7 +56,6 @@ class SimulationManager:
             writer.writerows(history)
         
         print(f"Simulation saved to {output_filename}")
-        self.socketio.emit('trajectory', "Simulation Complete")
 
 class ResultHandler:
     def fetch_result():
