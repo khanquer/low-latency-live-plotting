@@ -35,7 +35,7 @@ class SimulationManager:
                 current_row = [current_time] + [float(t[0]) for t in things]
                 
                 # Emit to UI
-                self.socketio.emit('trajectory', {'data': current_row})
+                self.socketio.emit('trajectory', current_row)
                 
                 # Store for saving later
                 history.append(current_row)
