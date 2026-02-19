@@ -1,11 +1,19 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Plot from 'react-plotly.js';
 
-const FlowChart = ({ varName, varIndex, socket }) => {
+const FlowChart = ({ varName, varIndex, socket, isSimulating }) => {
   // Refs store the accumulating data without triggering a render for every row
   const xData = useRef([]);
   const yData = useRef([]);
   const [revision, setRevision] = useState(0);
+
+  useEffect(() => {
+    if (isSimulating) {
+      xData.current = [];
+      yData.current = [];
+      setRevision(prev => prev + 1);
+    }
+  }, [isSimulating]);
 
   // Memoize layout to keep the UI snappy
   const layout = useMemo(() => ({

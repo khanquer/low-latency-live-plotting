@@ -63,7 +63,7 @@ function App() {
         <div style={{ flex: 2 }}>
           <h2 style={{ color: '#ff6600', borderBottom: '2px solid #ff6600' }}>Live Simulation Feed</h2>
           {variables.map((v, index) => (
-            <FlowChart key={v} varName={v} varIndex={index + 1} socket={socket} />
+            <FlowChart key={v} varName={v} varIndex={index + 1} socket={socket} isSimulating={isSimulating}/>
           ))}
         </div>
 
